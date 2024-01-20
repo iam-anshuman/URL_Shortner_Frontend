@@ -15,7 +15,7 @@ async function handleSubmit(event){
       const data = new FormData(event.currentTarget);
       const urlData = data.get("shortUrl");
       const userToken = JSON.parse(localStorage.getItem("user"));
-      const response = await fetch("http://localhost:3000/url/",{
+      const response = await fetch("https://abc-ccy5.onrender.com/url/",{
         method:"POST",
         headers:{
           "Content-Type":"application/json",
@@ -35,7 +35,7 @@ async function handleSubmit(event){
 
   return (
 <>
-        <Box component="form" method={"POST"} action={"http://localhost:3000/url/"} onSubmit={handleSubmit} noValidate sx={{ my: 6 ,
+        <Box component="form" method={"POST"} action={"https://abc-ccy5.onrender.com/url/"} onSubmit={handleSubmit} noValidate sx={{ my: 6 ,
         display: "flex",
         width: "90vw",
         height: "76px",
@@ -89,7 +89,7 @@ async function handleSubmit(event){
                 variant='contained'
                 color="primary"
                 onClick={()=>{
-                navigator.clipboard.writeText(`http://localhost:3000/${shortID}`);
+                navigator.clipboard.writeText(`https://abc-ccy5.onrender.com/${shortID}`);
                 setButtonValue("Copied");
 
                 }}>Copy Mini-URL</Button>
@@ -98,7 +98,7 @@ async function handleSubmit(event){
               }
               <Tooltip title={"Open link"}>
               <IconButton sx={{mx:1}}>
-                <LaunchIcon color='light' onClick={()=>{window.open(`http://localhost:3000/${shortID}`,"_blank")}}/>
+                <LaunchIcon color='light' onClick={()=>{window.open(`https://abc-ccy5.onrender.com/${shortID}`,"_blank")}}/>
               </IconButton>
               </Tooltip>
             </Box>

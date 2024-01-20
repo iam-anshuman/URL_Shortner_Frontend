@@ -13,7 +13,7 @@ export default function Row(props) {
 
     const handleCopy = (shortID) => {
         setCopy(true);
-        navigator.clipboard.writeText(`http://localhost:3000/${shortID}`);
+        navigator.clipboard.writeText(`https://abc-ccy5.onrender.com/${shortID}`);
       };
     
       const handleClose = (event, reason) => {
@@ -83,7 +83,7 @@ export default function Row(props) {
                     
                       <TableRow >
                         <TableCell component="th" scope="row">
-                          {`http://localhost:3000/${url.shortID}`}
+                          {`https://abc-ccy5.onrender.com/${url.shortID}`}
                         </TableCell>
                         <Tooltip title={url.redirectURL}>
                             <TableCell>{url.redirectURL.slice(0,20)}...</TableCell>

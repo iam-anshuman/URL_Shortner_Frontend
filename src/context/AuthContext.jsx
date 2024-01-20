@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
         return
       }
 
-      const response = await fetch("http://localhost:3000/home",{
+      const response = await fetch("https://abc-ccy5.onrender.com/home",{
         method:"GET",
         headers:{
           "authorization": `Bearer ${userToken.data.token}`
