@@ -13,11 +13,9 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Row from './Row';
+import { BeatLoader } from 'react-spinners';
 import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
 import '@fontsource/roboto/900.css';
-import Footer from './Footer';
 
 
 const RobotoFont = createTheme({
@@ -56,17 +54,20 @@ function Analytics() {
 
     const [urls,setUrls] = useState([]);
     const [copy, setCopy] = useState(false);
+    const [loading,setLoading] = useState(false)
 
 useEffect(()=>{
+  setLoading(true)
     async function getAnalytics(){
+
         const userToken = JSON.parse(localStorage.getItem("user"));
 
         if(!userToken){
-          setIsLoading(false);
+          setLoading(false);
           return
         }
         try {
-            const response = await fetch("http://localhost:3000/url/analytics",{
+            const response = await fetch("https://abc-ccy5.onrender.com/url/analytics",{
                 method:"GET",
                 headers:{
                     "Authorization":`Bearer ${userToken.data.token}`
@@ -74,14 +75,16 @@ useEffect(()=>{
             });
             const jsonData = await response.json();
             if(response.ok){
+              setLoading(false)
                 setUrls(jsonData);
             }
             else{
+              setLoading(false)
                 alert(jsonData);
             }
 
         } catch (error) {
-            
+            console.log(error);
         }
 
     }
@@ -90,7 +93,7 @@ useEffect(()=>{
 
 const handleCopy = (shortID) => {
     setCopy(true);
-    navigator.clipboard.writeText(`http://localhost:3000/${shortID}`);
+    navigator.clipboard.writeText(`https://abc-ccy5.onrender.com/${shortID}`);
   };
 
   const handleClose = (event, reason) => {
@@ -116,6 +119,7 @@ const action = (
     </>
 );
 
+
     return (
     <>
     <Navbar/>
@@ -123,7 +127,7 @@ const action = (
         <CssBaseline/>
     <Box component={"main"} height={"100%"} width={"100%"}>
       <Box sx={{mt:20,mx:{sm:10,xs:0},px:5,textAlign:'center'}} >
-        <Typography variant='h4' fontSize={"60px"} color="#9EC8B9" fontWeight={800} lineHeight={"90.015px" } sx={{background:"linear-gradient(90deg, #144EE3 -0.02%, #EB568E 18.86%, #A353AA 64.49%, #144EE3 100.67%)",backgroundClip:"text","-webkit-background-clip":"text","-webkit-text-fill-color":"transparent"}}>
+        <Typography variant='h4' fontSize={"60px"} color="#9EC8B9" fontWeight={800} lineHeight={"90.015px" } sx={{background:"linear-gradient(90deg, #144EE3 -0.02%, #EB568E 18.86%, #A353AA 64.49%, #144EE3 100.67%)",backgroundClip:"text",WebkitBackgroundClip:"text",WebkitTextFillColor:"transparent"}}>
              Your Shorten Link History ! 
         </Typography>
         <Typography sx={{
@@ -136,7 +140,7 @@ const action = (
             }} variant='subtitle1'>These all are the Links you have created.</Typography>
        </Box>
        
-{!(urls.length) === 0 ?
+{urls.length != 0 ?
        <TableContainer component={Paper} sx={{display:{xs:"none",sm:"block"},mt:2}}>
       <Table width={"100%"}aria-label="customized table">
         <TableHead>
@@ -153,7 +157,7 @@ const action = (
               <StyledTableCell component="th" scope="row">
                 {url.shortID}
               </StyledTableCell>
-                <StyledTableCell align="right">{`http://localhost:3000/${url.shortID}`}
+                <StyledTableCell align="right">{`https://abc-ccy5.onrender.com/${url.shortID}`}
                 <IconButton onClick={()=>{handleCopy(url.shortID)}}> <ContentCopyIcon/> </IconButton>
                 <Snackbar
                   open={copy}
@@ -176,6 +180,13 @@ const action = (
     :
     <Box >
         <Typography variant='h5' sx={{textAlign:"center",mt:4}}> There is Nothing to show. You have not created a Mini link yet :,)</Typography>
+        {
+        loading&&
+        <Box sx={{display:'flex',justifyContent:"center",mt:2}}>
+          <BeatLoader color="grey" />
+           Loading Analytics...
+        </Box>
+        }
     </Box>
     }
 {
