@@ -2,13 +2,18 @@ import {useState} from 'react';
 import { AppBar, Box,Toolbar, IconButton, Typography, Menu, Container, Avatar, Button, Tooltip,MenuItem} from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
+import { useAuth } from '../context/AuthContext';
+import { useLogOut } from '../hooks/useLogOut';
+import { Link } from 'react-router-dom';
 
-const pages = ['Short-URL', 'Pricing', 'Contact'];
-const settings = ['Profile', 'Dashboard', 'Logout'];
+const pages = ['Short-Url', 'Analytics'];
 
-function ResponsiveAppBar() {
+function Navbar() {
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  const { user } = useAuth();
+  const {logout} = useLogOut();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -25,9 +30,14 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
+  const handleLogOut = ()=>{
+    logout();
+    handleCloseNavMenu();
+  }
+
   return (
     <nav>
-    <AppBar position="fixed" sx={{backgroundColor:"#092635"}}>
+    <AppBar position="fixed" sx={{background:"#29344a"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <LinkIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -35,7 +45,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -79,7 +89,7 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                <MenuItem  onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">{page}</Typography>
                 </MenuItem>
               ))}
@@ -106,20 +116,24 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
+              <Link to={`/${page}`}>
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
-              >
+                >
                 {page}
               </Button>
+                </Link>
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+{ user ?
+            <Box sx={{ flexGrow: 0 }}>
+              <Typography variant='subtitle' sx={{mx:1,display:{xs:'none',md:"inline"}}}>{user.data.email}</Typography>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="" />
+                <Avatar alt={user.data.email} src="./Assets" />
               </IconButton>
             </Tooltip>
             <Menu
@@ -138,18 +152,30 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                <MenuItem onClick={handleLogOut}>
+                  <Typography textAlign="center">Log Out</Typography>
                 </MenuItem>
-              ))}
             </Menu>
           </Box>
+          :
+<Box component={"div"}>
+
+          <Link to={"/signup"}><Button sx={{mx:1}} variant="contained">
+            Sign Up
+        </Button>
+        </Link>
+        <Link to={"/login"}>
+        <Button sx={{mx:1}} variant="outlined">
+            Login 
+        </Button>
+        </Link>
+        </Box>
+}
         </Toolbar>
       </Container>
     </AppBar>
     </nav>
   );
 }
-export default ResponsiveAppBar;
+export default Navbar;
 

@@ -1,40 +1,61 @@
 import React from 'react';
-import { Box, Grid, Typography, Container, Paper } from '@mui/material';
-import {Link} from "@mui/icons-material";
-
+import { Box,Grid, Typography,Stack, Paper } from '@mui/material';
+import {Link as LinkIcon ,Assessment,Person2Outlined,QrCode} from "@mui/icons-material";
 
 function ContentSection() {
-  return (
-    <Container>
-    <Box sx={{mt:5,fontFamily:"ubuntu, sans-serif"}}>
-        <Grid spacing={2} justifyContent={"space-evenly"} container>
-            <Grid  lg={12} item>
-                <Typography variant='h3' fontWeight={"bold"} textAlign={"center"}>What is <Box sx={{color:"#3AD670",display:"inline",fontStyle:"italic"}}>Mini-URL?</Box></Typography>
-                <Typography sx={{my:3}} variant='body1' textAlign={"center"}>Mini-URL is an all-in-one Link Management Platform for all your links and needs. It is an advanced URL Shortener with extensive Link Analytics. Mini-URL offers solutions that will allow you to manage your links, thanks to which you can develop your business while having your links under control. Mini-URL is also a platform for creating your own Link in bio microsites and generating QR Codes, so you can combine offline and online solutions.</Typography>    
-            </Grid>
+  return (<>
+    <Stack>
+        <Box sx={{fontFamily:"Roboto, sans-serif"}}>
+            <Typography variant='h3' textAlign={"center"} sx={{mt:10,fontWeight:"bold"}}>What is <Box sx={{fontStyle:"italic",display:"inline",color:"#3bd671"}}>Mini-URL?</Box></Typography>
+            <Typography variant='body1' textAlign={"center"} sx={{my:4}}>Mini-URL is an all-in-one Link Management Platform for all your links and needs. It is an advanced URL Shortener with extensive Link Analytics. Mini-URL offers solutions that will allow you to manage your links, thanks to which you can develop your business while having your links under control. Mini-URL is also a platform for creating your own Link in bio microsites and generating QR Codes, so you can combine offline and online solutions.</Typography>
+        </Box>
+    </Stack>
+    <Grid spacing={2} container>
 
-            <Grid lg={6} sx={{backgroundColor:"white", color:"black", borderRadius:"15px"}} item>
-                <Typography variant='h3' textAlign='center'><Link sx={{fontSize:"3rem", transform:"rotate(130deg)"}}/>URL Shortner</Typography>
-                <Typography sx={{my:3,px:2}} variant='body1' textAlign={"center"}>Mini-URL is a URL Shortener and Link Management Platform. It offers a lot of features that will help you handle all your links in an intuitive way and reveal the potential of your links.</Typography>
-                <Box component={"img"} sx={{
-                    height: 500,
-                    width: 300,
-                    maxHeight: { xs: 400, md: "400px" },
-                    maxWidth: { xs: 350, md: "350px" },
-                    borderRadius:"12px",
-                    mx:15,mt:5,
-                }} alt='Phone image' src='../src/Assets/Mobile_Phone.jpg'/>
-            </Grid>
-            
-            <Grid lg={6} sx={{backgroundColor:"blue"}} container>
-                <Grid sx={{backgroundColor:"beige"}} xs={12}>2.1</Grid>
-                <Grid sx={{backgroundColor:"beige"}} xs={12}>2.2</Grid>
-            </Grid>
-
+        <Grid item  xs={12} sm={12} md={6} >
+            <Box sx={{border:"2px solid white",borderRadius:"14px"}}>
+                <Typography variant='h3' marginTop={1}><LinkIcon  fontSize='40px' sx={{color:'#3bd671',marginLeft:"10px",transform:"rotate(125deg)",position:"relative",top:"5px"}}/>URL Shortener</Typography>
+                <Typography variant="body1" sx={{m:4}}>Mini-URL is a URL Shortener and Link Management Platform. It offers a lot of features that will help you handle all your links in an intuitive way and reveal the potential of your links.</Typography>
+                <Box 
+                component={"img"} 
+                src='../src/Assets/Mobile_Phone.jpg' 
+                sx={{
+                    width:"250px",
+                    height:"250px",
+                    maxWidth:"400px",
+                    maxHeight:"400px",
+                    borderRadius:"15px",
+                    mx:4,
+                    mt:4
+                }}
+                />
+            </Box>
         </Grid>
-    </Box>
-    </Container>
+        <Grid marginLeft={2} xs={12} sm={12} md={5}>
+
+            <Grid item>
+                <Box sx={{border:"2px solid white", borderRadius:"12px"}} my={2}>
+                  <Typography variant='h3' margin={2}><Assessment fontSize='40px' sx={{color:"#3bd671",position:"relative",top:"5px"}}/>Link analytics</Typography>
+                  <Typography variant="body1" sx={{m:4}}>Mini-URL is an advanced Link Analytics platform that tracks clicks on short links and provides extensive statistics to help you measure the effectiveness of your short links.</Typography>
+                </Box>
+            </Grid>
+            <Grid item>
+                <Box sx={{border:"2px solid white", borderRadius:"12px"}}>
+                <Typography variant='h3' margin={2}><Person2Outlined fontSize='40px' sx={{color:"#3bd671",position:"relative",top:"5px"}}/>Link in bio</Typography>
+                <Typography variant="body1" sx={{m:4}}>Mini-URL lets you create your own link-in-bio microsites so you can better reach your audience, measure click-through rates, and grow your audience with customizable link-in-bios.</Typography>
+                </Box>
+            </Grid>
+        </Grid>
+        <Grid item  textAlign={"start"} xs={12} sm={12} md={11.2}>
+            <Box sx={{border:"2px solid white" , borderRadius:"12px"}}>
+            <Typography variant='h3' margin={2}><QrCode  fontSize='40px' sx={{color:"#3bd671",position:"relative",top:"5px",marginX:"8px"}}/>QR Codes</Typography>
+            <Typography variant="body1" sx={{m:4}}>With Mini-URL, you can easily generate and customize QR codes to match your brand and track their performance. Use QR codes to grow your business and measure their impact on your marketing efforts.</Typography>
+            </Box>
+        </Grid>
+    </Grid>
+
+  </>
   )
 }
 
-export default ContentSection
+export default ContentSection;
