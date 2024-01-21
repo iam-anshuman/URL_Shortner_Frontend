@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Box, Button, FormControl, IconButton, TextField, Tooltip,Input} from '@mui/material';
 import LaunchIcon from '@mui/icons-material/Launch';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 function Form() {
 
@@ -69,9 +70,27 @@ async function handleSubmit(event){
                   "&:hover":{
                     backgroundColor:"#426DDD",
                     color:"secondary"
-                  }
+                  },
+                  display:{xs:"none",md:"flex"}
                 }} >
                   Shorten Now
+                </Button>
+                <Button type='submit' sx={{
+                  width: "178px",
+                  borderRadius: "48px",
+                  border: "1px solid #144EE3",
+                  background: "#144EE3",
+                  boxShadow: "10px 9px 22px 0px rgba(20, 78, 227, 0.38)",
+                  padding:1.5,
+                  position:"relative",
+                  left:"-14%",
+                  "&:hover":{
+                    backgroundColor:"#426DDD",
+                    color:"secondary"
+                  },
+                  display:{xs:"flex",md:"none"}
+                }} >
+                  <IconButton><ArrowForwardIcon/></IconButton>
                 </Button>
             
                 </Box>
