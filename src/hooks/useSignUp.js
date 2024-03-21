@@ -13,6 +13,7 @@ export const useSignUp = ()=>{
 
         try {
             const response = await fetch("https://abc-ccy5.onrender.com/user/signup",{
+                mode: 'no-cors',
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json"

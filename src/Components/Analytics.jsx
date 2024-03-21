@@ -68,6 +68,7 @@ useEffect(()=>{
         }
         try {
             const response = await fetch("https://abc-ccy5.onrender.com/url/analytics",{
+                mode: 'no-cors',
                 method:"GET",
                 headers:{
                     "Authorization":`Bearer ${userToken.data.token}`
