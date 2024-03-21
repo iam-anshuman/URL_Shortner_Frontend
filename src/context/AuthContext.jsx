@@ -42,7 +42,6 @@ export const AuthProvider = ({ children }) => {
       }
 
       const response = await fetch("https://abc-ccy5.onrender.com/home",{
-        mode: 'no-cors',
         method:"GET",
         headers:{
           "authorization": `Bearer ${userToken.data.token}`

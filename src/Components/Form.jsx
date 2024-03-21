@@ -17,7 +17,6 @@ async function handleSubmit(event){
       const urlData = data.get("shortUrl");
       const userToken = JSON.parse(localStorage.getItem("user"));
       const response = await fetch("https://abc-ccy5.onrender.com/url/",{
-        mode: 'no-cors',        
         method:"POST",
         headers:{
           "Content-Type":"application/json",
